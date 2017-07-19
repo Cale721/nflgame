@@ -1,9 +1,38 @@
 def get_rushers(s):
-     games = nflgame.games_gen(s,w)
-     plays = nflgame.combine_plays(games)
+     games = nflgame.games_gen(s)
+     players = nflgame.combine_game_stats(games)
      rush_100 = 0
-     for p in plays.filter(rushing_yds__gt=100):
-             rush_100 +=p.rushing_yds
+     for p in players.rushing():
+          if p.rushing_yds > 99:
+               rush_100 +=1
+          
      return rush_100
 
-print get_rushers(2014, None)
+print get_rushers(2014)
+
+
+
+def get_rushers(s):
+     games = nflgame.games_gen(s)
+     players = nflgame.combine_game_plays(games)
+     rush_100 = 0
+     for p in players.rushing():
+          if p.rushing_yds > 99:
+               rush_100 +=1
+          
+     return rush_100
+
+print get_rushers(2014)
+
+
+
+games = nflgame.games(2014)
+players = nflgame.combine_game_stats(games)
+for p in players.rushing().sort('rushing_yds'):
+     if p.rushing_yds > 99:
+          
+          msg = '%s %d carries for %d yards and %d TDs'
+          print msg % (p, p.rushing_att, p.rushing_yds, p.rushing_tds)
+
+
+
