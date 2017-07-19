@@ -1,6 +1,6 @@
 def get_rushers(s):
-     games = nflgames.games_gen(s)
-     plays = nflgames.combine_plays(games)
+     games = nflgame.games_gen(s)
+     plays = nflgame.combine_plays(games)
      rush_100 = 0
      for p in plays.filter(rushing_yds__gt=100):
              rush_100 +=p.rushing_yds
