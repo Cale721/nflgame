@@ -34,5 +34,15 @@ for p in players.rushing().sort('rushing_yds'):
           msg = '%s %d carries for %d yards and %d TDs'
           print msg % (p, p.rushing_att, p.rushing_yds, p.rushing_tds)
 
+def get_defense(s):
+     games = nflgame.games_gen(s)
+     players = nflgame.combine_game_plays(games)
+     def_500 = 0
+     for p in players.rushing():
+          if p.rushing_yds > 99:
+               rush_100 +=1
+          
+     return rush_100
 
+print get_rushers(2014)
 
